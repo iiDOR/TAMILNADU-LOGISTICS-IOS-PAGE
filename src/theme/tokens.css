@@ -27,6 +27,7 @@
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     touch-action: pan-y;
+    touch-action: manipulation;
   }
 
   /* prevent iOS overscroll bounce — use overscroll-behavior instead of position:fixed

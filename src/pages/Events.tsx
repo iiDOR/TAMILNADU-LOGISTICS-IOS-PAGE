@@ -40,12 +40,12 @@ function parseUTC(iso: string): Date {
 }
 function isPast(iso: string) { return parseUTC(iso) < new Date(); }
 function isToday(iso: string) {
-  const ist = toIST(iso), n = toIST(new Date().toISOString());
-  return ist.getDate() === n.getDate() && ist.getMonth() === n.getMonth() && ist.getFullYear() === n.getFullYear();
+  const d = parseUTC(iso), n = new Date();
+  return d.getUTCDate() === n.getUTCDate() && d.getUTCMonth() === n.getUTCMonth() && d.getUTCFullYear() === n.getUTCFullYear();
 }
 function inMonth(iso: string, month: number, year: number) {
-  const ist = toIST(iso);
-  return ist.getMonth() === month && ist.getFullYear() === year;
+  const d = parseUTC(iso);
+  return d.getUTCMonth() === month && d.getUTCFullYear() === year;
 }
 function fmtDate(iso: string) {
   return toIST(iso).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });

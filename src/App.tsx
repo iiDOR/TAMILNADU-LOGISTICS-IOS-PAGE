@@ -10,8 +10,24 @@ import { MyJobsPage } from './pages/MyJobs';
 import { FleetPage } from './pages/Fleet';
 import { EventsPage } from './pages/Events';
 
+function isMobile() {
+  return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+}
+
 export default function App() {
   const { isAuthenticated, hydrate } = useAuthStore();
+
+  if (!isMobile()) {
+    return (
+      <div style={{ display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', height:'100vh', background:'#000', color:'#fff', textAlign:'center', padding:'0 24px' }}>
+        <img src="/icons/icon-192.png" alt="TNL" style={{ width:72, height:72, borderRadius:16, marginBottom:24 }} />
+        <h1 style={{ fontFamily:'sans-serif', fontSize:24, fontWeight:700, marginBottom:12 }}>TNL Tracker</h1>
+        <p style={{ color:'rgba(255,255,255,0.45)', fontSize:14, maxWidth:320 }}>
+          TNL Tracker is a mobile app. Open it on your iPhone or Android device.
+        </p>
+      </div>
+    );
+  }
   const [offline, setOffline] = useState(!navigator.onLine);
   const { needRefresh, updateServiceWorker } = useRegisterSW();
 
