@@ -30,11 +30,7 @@ function dedupKey(e: TNLEvent): string {
   return e._id;
 }
 
-// API dates are UTC without 'Z' — append Z so JS parses as UTC, then shift +5:30 to IST
-function toIST(iso: string): Date {
-  const utc = new Date(iso.includes('Z') || iso.includes('+') ? iso : iso + 'Z');
-  return new Date(utc.getTime() + 330 * 60000);
-}
+// Parse API dates as UTC (no Z = UTC from backend)
 function parseUTC(iso: string): Date {
   return new Date(iso.includes('Z') || iso.includes('+') ? iso : iso + 'Z');
 }
@@ -47,11 +43,12 @@ function inMonth(iso: string, month: number, year: number) {
   const d = parseUTC(iso);
   return d.getUTCMonth() === month && d.getUTCFullYear() === year;
 }
+// Display in UTC — matches TruckersMP event page dates
 function fmtDate(iso: string) {
-  return toIST(iso).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+  return parseUTC(iso).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' });
 }
 function fmtTime(iso: string) {
-  return toIST(iso).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  return parseUTC(iso).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' }) + ' UTC';
 }
 
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
