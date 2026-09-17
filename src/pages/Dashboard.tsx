@@ -170,7 +170,7 @@ export function DashboardPage() {
         {loading
           ? [...Array(3)].map((_, i) => <div key={i} className="skeleton h-10 mb-2 rounded-lg" />)
           : recentEvents.length
-            ? recentEvents.map((e, i) => <EventRow key={i} event={e} />)
+            ? recentEvents.map((e: any, i: number) => <EventRow key={i} event={e} />)
             : <p className="text-sm text-[--fg-3]">No events yet.</p>
         }
       </div>
