@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --tn-gold:      #f5c518;
+    --tn-gold-dim:  #9e7d00;
+    --bd-gold:      rgba(245,197,24,0.3);
+    --bd-soft:      rgba(255,255,255,0.08);
+    --bd-hairline:  rgba(255,255,255,0.05);
+    --fg-1: #ffffff;
+    --fg-2: rgba(255,255,255,0.65);
+    --fg-3: rgba(255,255,255,0.35);
+    --ff-display: 'Bebas Neue', sans-serif;
+    --ff-mono:    'JetBrains Mono', monospace;
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    --sal: env(safe-area-inset-left);
+    --sar: env(safe-area-inset-right);
+    --tab-bar-h: 60px;
+  }
+
+  html, body, #root {
+    @apply h-full bg-base text-white font-sans antialiased;
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    touch-action: pan-y;
+  }
+
+  /* prevent iOS overscroll bounce — use overscroll-behavior instead of position:fixed
+     (position:fixed on body breaks fixed-position children and sheet anchoring) */
+  #root { overflow: hidden; height: 100dvh; }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-elevated rounded; }
+}
+
+@layer components {
+  .card {
+    @apply bg-card border border-soft rounded-xl p-4;
+  }
+
+  .eyebrow {
+    @apply text-[10px] font-bold tracking-[0.16em] uppercase text-gold;
+  }
+
+  .btn-gold {
+    @apply px-4 py-2 rounded-lg bg-gold text-black font-bold text-sm font-sans
+           active:scale-95 transition-transform;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 rounded-lg border border-soft text-[--fg-2] font-semibold text-sm
+           active:scale-95 transition-transform;
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, #111 25%, rgba(255,255,255,0.04) 50%, #111 75%);
+    background-size: 800px 100%;
+    @apply animate-shimmer rounded;
+  }
+
+  .pill {
+    @apply px-4 py-1.5 rounded-full border text-xs font-semibold cursor-pointer
+           transition-colors select-none;
+  }
+
+  .pill-active {
+    @apply border-[--bd-gold] bg-gold/10 text-gold;
+  }
+
+  .pill-inactive {
+    @apply border-soft text-[--fg-3];
+  }
+}
