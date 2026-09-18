@@ -61,6 +61,25 @@ export function ProfileSheet() {
         <div style={{ height: 1, background: 'rgba(255,255,255,0.08)', marginBottom: 20 }} />
 
         <button
+          onClick={() => {
+            try {
+              localStorage.removeItem('tnl_my_jobs');
+              localStorage.removeItem('tnl_fleet');
+              localStorage.removeItem('tnl_events');
+            } catch {}
+            window.location.reload();
+          }}
+          style={{
+            width: '100%', padding: '12px', borderRadius: 12, marginBottom: 10,
+            border: '1px solid rgba(245,197,24,0.4)',
+            background: 'transparent', color: '#f5c518',
+            fontSize: 14, fontWeight: 700, cursor: 'pointer',
+          }}
+        >
+          Clear Cache
+        </button>
+
+        <button
           onClick={() => { logout(); setOpen(false); }}
           style={{
             width: '100%', padding: '12px', borderRadius: 12,

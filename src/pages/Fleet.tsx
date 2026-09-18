@@ -44,7 +44,7 @@ function FleetSummary({ jobs }: { jobs: any[] }) {
       ].map(({ label, value }) => (
         <div key={label} className="card p-3 text-center">
           <p className="text-[9px] font-semibold uppercase tracking-widest text-[--fg-3] mb-1">{label}</p>
-          <p className="font-display text-base text-gold leading-none">{value}</p>
+          <p className="font-display text-sm text-gold leading-none break-all">{value}</p>
         </div>
       ))}
     </div>
@@ -127,15 +127,19 @@ export function FleetPage() {
   }, []);
 
   useEffect(() => {
-    if (jobs.length > 0) return;
-    setLoading(true);
-    apiGetAllJobs()
-      .then(j => {
-        setJobs(j);
-        try { localStorage.setItem('tnl_fleet', JSON.stringify(j)); } catch {}
-      })
-      .catch(e => setError(e.message))
-      .finally(() => setLoading(false));
+    const load = () => {
+      setLoading(true);
+      apiGetAllJobs()
+        .then(j => {
+          setJobs(j);
+          try { localStorage.setItem('tnl_fleet', JSON.stringify(j)); } catch {}
+        })
+        .catch(e => setError(e.message))
+        .finally(() => setLoading(false));
+    };
+    load();
+    const timer = setInterval(load, 60_000);
+    return () => clearInterval(timer);
   }, []);
 
   const filtered = useMemo(() => {

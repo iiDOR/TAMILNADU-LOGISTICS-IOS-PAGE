@@ -43,12 +43,11 @@ function inMonth(iso: string, month: number, year: number) {
   const d = parseUTC(iso);
   return d.getUTCMonth() === month && d.getUTCFullYear() === year;
 }
-// Display in UTC — matches TruckersMP event page dates
 function fmtDate(iso: string) {
-  return parseUTC(iso).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' });
+  return parseUTC(iso).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 }
 function fmtTime(iso: string) {
-  return parseUTC(iso).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' }) + ' UTC';
+  return parseUTC(iso).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 }
 
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
