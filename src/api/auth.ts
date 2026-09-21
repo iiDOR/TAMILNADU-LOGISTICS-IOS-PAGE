@@ -1,4 +1,4 @@
-const BASE = import.meta.env.VITE_API_URL ?? 'https://api.tamilnadulogistics.in';
+import { API_URL as BASE } from '../config';
 
 export interface LoginResponse {
   token: string;

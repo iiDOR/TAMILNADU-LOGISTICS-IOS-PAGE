@@ -1,5 +1,4 @@
-const BASE = import.meta.env.VITE_API_URL ?? 'https://api.tamilnadulogistics.in';
-const JOBS_URL = 'https://tnl.wispbyte.app/api/public/jobs?size=1000';
+﻿import { API_URL as BASE, WISP_URL } from '../config';
 
 export interface DashboardData {
   user: any;
@@ -14,7 +13,7 @@ export interface DashboardData {
 }
 
 export async function apiGetUserJobs(tmpId: string): Promise<any[]> {
-  const res = await fetch(`https://tnl.wispbyte.app/api/public/jobs?tmp_id=${tmpId}&size=1000`);
+  const res = await fetch(`${WISP_URL}/api/public/jobs?tmp_id=${tmpId}&size=1000`);
   if (!res.ok) throw new Error('Failed to load jobs');
   const data = await res.json();
   const all: any[] = data?.jobs ?? [];

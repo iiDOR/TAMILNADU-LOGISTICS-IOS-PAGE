@@ -1,8 +1,9 @@
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import { useAuthStore } from '../store/authStore';
 
-const TNL_API  = 'https://api.tamilnadulogistics.in/api/events/';
-const VTC_API  = 'https://tnl.wisp.uno/api/tmp/vtc/70030/events/attending';
+import { API_URL, WISP_URL, VTC_ID } from '../config';
+const TNL_API  = `${API_URL}/api/events/`;
+const VTC_API  = `${WISP_URL}/api/tmp/vtc/${VTC_ID}/events/attending`;
 const CACHE_KEY = 'tnl_events';
 
 interface TNLEvent {

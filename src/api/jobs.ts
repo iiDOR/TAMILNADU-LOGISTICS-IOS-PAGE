@@ -1,4 +1,5 @@
-const JOBS_URL = 'https://tnl.wispbyte.app/api/public/jobs';
+﻿import { WISP_URL } from '../config';
+const JOBS_URL = `${WISP_URL}/api/public/jobs`;
 
 export async function apiGetMyJobs(tmpId: string): Promise<any[]> {
   const res = await fetch(`${JOBS_URL}?tmp_id=${tmpId}&size=1000`);
