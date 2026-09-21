@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo, useCallback } from 'react';
 import { useAuthStore } from '../store/authStore';
 
 const TNL_API  = 'https://api.tamilnadulogistics.in/api/events/';
-const VTC_API  = 'https://tnl.wispbyte.app/api/tmp/vtc/70030/events/attending';
+const VTC_API  = 'https://tnl.wisp.uno/api/tmp/vtc/70030/events/attending';
 const CACHE_KEY = 'tnl_events';
 
 interface TNLEvent {
@@ -30,7 +30,6 @@ function dedupKey(e: TNLEvent): string {
   return e._id;
 }
 
-// Parse API dates as UTC (no Z = UTC from backend)
 function parseUTC(iso: string): Date {
   return new Date(iso.includes('Z') || iso.includes('+') ? iso : iso + 'Z');
 }
@@ -92,7 +91,6 @@ function GameChip({ server }: { server: string }) {
   );
 }
 
-// Full-width hero card for today's event
 function FeaturedCard({ ev }: { ev: TNLEvent }) {
   const target = ev.departureDate || ev.startDate;
   const happening = !isPast(target) && isToday(target);
@@ -143,7 +141,6 @@ function FeaturedCard({ ev }: { ev: TNLEvent }) {
   );
 }
 
-// Compact card for upcoming runs
 function EventCard({ ev }: { ev: TNLEvent }) {
   const [open, setOpen] = useState(false);
   const target = ev.departureDate || ev.startDate;
@@ -307,7 +304,6 @@ export function EventsPage() {
 
   return (
     <div className="px-5 py-6">
-      {/* Header */}
       <div className="mb-5">
         <p className="eyebrow mb-1">Convoys & Events</p>
         <div className="flex items-end justify-between">
@@ -321,7 +317,6 @@ export function EventsPage() {
 
       {error && <p className="text-sm text-red-400 mb-4">{error}</p>}
 
-      {/* Month nav + filter */}
       <div className="flex items-center justify-between mb-3">
         <button onClick={() => shiftMonth(-1)} className="w-8 h-8 flex items-center justify-center rounded-full border border-soft text-[--fg-2] active:scale-95 text-lg">‹</button>
         <span className={`text-sm font-semibold ${isCurrentMonth ? 'text-gold' : 'text-white'}`}>
@@ -339,7 +334,6 @@ export function EventsPage() {
         ))}
       </div>
 
-      {/* Skeletons */}
       {loading && (
         <>
           <div className="card border-[--bd-gold] mb-4">
@@ -359,7 +353,6 @@ export function EventsPage() {
 
       {!loading && (
         <>
-          {/* Happening Today */}
           {happeningToday.length > 0 && (
             <div className="mb-2">
               <p className="eyebrow mb-3">Happening Today</p>
@@ -367,7 +360,6 @@ export function EventsPage() {
             </div>
           )}
 
-          {/* Upcoming Runs */}
           {upcomingRuns.length > 0 && (
             <div>
               <p className="eyebrow mb-3">
